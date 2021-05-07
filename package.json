@@ -1,0 +1,25 @@
+{
+    "name": "homebridge-synchrotron",
+    "keywords": [
+        "homebridge-plugin"
+    ],
+    "version": "1.0.0",
+    "main": "build/index.js",
+    "license": "MIT",
+    "scripts": {
+        "postinstall": "tsc"
+    },
+    "engines": {
+        "homebridge": ">=1.0.0"
+    },
+    "dependencies": {
+        "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {
+        "@types/node": "^15.0.2",
+        "@types/node-fetch": "^2.5.10",
+        "homebridge": "^1.3.4",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.2.4"
+    }
+}
