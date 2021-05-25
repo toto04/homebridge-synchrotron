@@ -17,10 +17,12 @@ export class SynchrotronLight implements AccessoryPlugin {
         this.service = new hap.Service.Lightbulb(name)
         this.service.getCharacteristic(hap.Characteristic.On)
             .on(CharacteristicEventTypes.GET, async cb => {
-                let res = await fetch('http://localhost:2077/lights/' + name)
-                let { switchedOn }: { switchedOn: boolean } = await res.json()
-                this.on = switchedOn
                 cb(undefined, this.on)
+                let res = await fetch('http://localhost:2077/lights/' + name)
+                let { switchedOn } = await res.json()
+                if (typeof switchedOn !== 'boolean') return
+                this.on = switchedOn
+                this.service.getCharacteristic(hap.Characteristic.On).updateValue(this.on)
             })
             .on(CharacteristicEventTypes.SET, async (val, cb) => {
                 this.on = val as boolean
